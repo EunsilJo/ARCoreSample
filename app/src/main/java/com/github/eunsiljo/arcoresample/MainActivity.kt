@@ -14,6 +14,7 @@ import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.*
 import com.google.ar.sceneform.ux.ArFragment
 import com.google.ar.sceneform.ux.BaseArFragment
+import com.google.ar.sceneform.ux.TransformableNode
 import java.util.concurrent.CompletableFuture
 
 class MainActivity : AppCompatActivity(), BaseArFragment.OnTapArPlaneListener {
@@ -57,6 +58,19 @@ class MainActivity : AppCompatActivity(), BaseArFragment.OnTapArPlaneListener {
     private var viewRenderable: ViewRenderable? = null
     private var modelRenderable: ModelRenderable? = null
 
+    private var textViewRenderable: ViewRenderable? = null
+    private var imageViewRenderable: ViewRenderable? = null
+    private var andyRenderable: ModelRenderable? = null
+    private var sphereRenderable: ModelRenderable? = null
+    private var cubeRenderable: ModelRenderable? = null
+    private var cylinderRenderable: ModelRenderable? = null
+    private var duckRenderable: ModelRenderable? = null
+
+    private val viewNode
+        get() = viewRenderable?.let { Node().apply { renderable = it } }
+    private val modelNode
+        get() = modelRenderable?.let { Node().apply { renderable = it } }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (!checkIsSupportedDevice()) {
@@ -64,10 +78,76 @@ class MainActivity : AppCompatActivity(), BaseArFragment.OnTapArPlaneListener {
         }
         setContentView(R.layout.activity_main)
 
-        setModelRenderable(duckState)
+        setAllRenderables()
         arFragment.setOnTapArPlaneListener(this)
     }
-    
+
+    private fun setAllRenderables() {
+        CompletableFuture.allOf(
+            textViewState,
+            imageViewState,
+            andyState,
+            materialState,
+            duckState
+        ).handle { _, throwable ->
+            when (throwable == null) {
+                true -> {
+                    textViewRenderable = textViewState.get()
+                    imageViewRenderable = imageViewState.get()
+                    andyRenderable = andyState.get()
+                    sphereRenderable =
+                        makeMaterialModelRenderable(ARShapeType.SPHERE, materialState.get())
+                    cubeRenderable =
+                        makeMaterialModelRenderable(ARShapeType.CUBE, materialState.get())
+                    cylinderRenderable =
+                        makeMaterialModelRenderable(ARShapeType.CYLINDER, materialState.get())
+                    duckRenderable = duckState.get()
+                }
+                false -> {
+                    Toast.makeText(this, "Unable to load renderables", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+    override fun onTapPlane(hitResult: HitResult, plane: Plane, motionEvent: MotionEvent) {
+        val anchorNode = AnchorNode(hitResult.createAnchor()).apply {
+            setParent(arFragment.arSceneView.scene)
+            addChild(createBaseNode())
+        }
+
+        andyRenderable?.let {
+            TransformableNode(arFragment.transformationSystem).apply {
+                setParent(anchorNode)
+                renderable = it.apply {
+                    localScale = Vector3(0.2f, 0.2f, 0.2f)
+                    select()
+                }
+            }
+        }
+    }
+
+    private fun createBaseNode(): Node = Node().apply {
+        val baseNode = this
+        textViewRenderable?.let {
+            Node().apply {
+                setParent(baseNode)
+                renderable = it.apply {
+                    localPosition = Vector3(-0.2f, -0.2f, -0.2f)
+                }
+            }
+        }
+
+        imageViewRenderable?.let {
+            Node().apply {
+                setParent(baseNode)
+                renderable = it.apply {
+                    localPosition = Vector3(0.2f, 0.2f, 0.2f)
+                }
+            }
+        }
+    }
+
     private fun setViewRenderable(viewState: CompletableFuture<ViewRenderable>) {
         viewState
             .thenAccept { renderable -> viewRenderable = renderable }
@@ -92,30 +172,7 @@ class MainActivity : AppCompatActivity(), BaseArFragment.OnTapArPlaneListener {
     ) {
         materialState
             .thenAccept { material ->
-                modelRenderable = when (shapeType) {
-                    ARShapeType.SPHERE -> {
-                        ShapeFactory.makeSphere(
-                            0.1f,
-                            Vector3(0.0f, 0.15f, 0.0f),
-                            material
-                        )
-                    }
-                    ARShapeType.CUBE -> {
-                        ShapeFactory.makeCube(
-                            Vector3(0.2f, 0.2f, 0.2f),
-                            Vector3(0.0f, 0.15f, 0.0f),
-                            material
-                        )
-                    }
-                    ARShapeType.CYLINDER -> {
-                        ShapeFactory.makeCylinder(
-                            0.1f,
-                            0.3f,
-                            Vector3(0.0f, 0.15f, 0.0f),
-                            material
-                        )
-                    }
-                }
+                modelRenderable = makeMaterialModelRenderable(shapeType, material)
             }
             .exceptionally {
                 Toast.makeText(this, "Unable to load material renderable", Toast.LENGTH_LONG).show()
@@ -123,25 +180,50 @@ class MainActivity : AppCompatActivity(), BaseArFragment.OnTapArPlaneListener {
             }
     }
 
-    override fun onTapPlane(hitResult: HitResult, plane: Plane, motionEvent: MotionEvent) {
-        val anchorNode = AnchorNode(hitResult.createAnchor()).apply {
-            setParent(arFragment.arSceneView.scene)
-        }
-        viewRenderable?.let {
-            Node().apply {
-                setParent(anchorNode)
-                renderable = it
+    private fun makeMaterialModelRenderable(
+        shapeType: ARShapeType,
+        material: Material
+    ): ModelRenderable =
+        when (shapeType) {
+            ARShapeType.SPHERE -> {
+                ShapeFactory.makeSphere(
+                    0.1f,
+                    Vector3(0.0f, 0.15f, 0.0f),
+                    material.apply {
+                        setFloat3(
+                            MaterialFactory.MATERIAL_COLOR,
+                            Color(android.graphics.Color.RED)
+                        )
+                        setFloat(MaterialFactory.MATERIAL_METALLIC, 1f)
+                    }
+                )
             }
-            it.view.setOnClickListener {
-                Toast.makeText(this, "Clicked!", Toast.LENGTH_LONG).show()
+            ARShapeType.CUBE -> {
+                ShapeFactory.makeCube(
+                    Vector3(0.2f, 0.2f, 0.2f),
+                    Vector3(0.0f, 0.15f, 0.0f),
+                    material.apply {
+                        setFloat3(
+                            MaterialFactory.MATERIAL_COLOR,
+                            Color(android.graphics.Color.BLUE)
+                        )
+                        setFloat(MaterialFactory.MATERIAL_ROUGHNESS, 1f)
+                    }
+                )
+            }
+            ARShapeType.CYLINDER -> {
+                ShapeFactory.makeCylinder(
+                    0.1f,
+                    0.3f,
+                    Vector3(0.0f, 0.15f, 0.0f),
+                    material.apply {
+                        setFloat3(
+                            MaterialFactory.MATERIAL_COLOR,
+                            Color(android.graphics.Color.GREEN)
+                        )
+                        setFloat(MaterialFactory.MATERIAL_REFLECTANCE, 1f)
+                    }
+                )
             }
         }
-
-        modelRenderable?.let {
-            Node().apply {
-                setParent(anchorNode)
-                renderable = it
-            }
-        }
-    }
 }
