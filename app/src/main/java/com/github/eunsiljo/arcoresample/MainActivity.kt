@@ -67,16 +67,10 @@ class MainActivity : AppCompatActivity(), BaseArFragment.OnTapArPlaneListener {
         setModelRenderable(duckState)
         arFragment.setOnTapArPlaneListener(this)
     }
-
+    
     private fun setViewRenderable(viewState: CompletableFuture<ViewRenderable>) {
         viewState
-            .thenAccept { renderable ->
-                viewRenderable = renderable
-
-                renderable.view.setOnClickListener {
-                    Toast.makeText(this, "Clicked!", Toast.LENGTH_LONG).show()
-                }
-            }
+            .thenAccept { renderable -> viewRenderable = renderable }
             .exceptionally {
                 Toast.makeText(this, "Unable to load view renderable", Toast.LENGTH_LONG).show()
                 null
@@ -85,9 +79,7 @@ class MainActivity : AppCompatActivity(), BaseArFragment.OnTapArPlaneListener {
 
     private fun setModelRenderable(modelState: CompletableFuture<ModelRenderable>) {
         modelState
-            .thenAccept { renderable ->
-                modelRenderable = renderable
-            }
+            .thenAccept { renderable -> modelRenderable = renderable }
             .exceptionally {
                 Toast.makeText(this, "Unable to load model renderable", Toast.LENGTH_LONG).show()
                 null
@@ -139,6 +131,9 @@ class MainActivity : AppCompatActivity(), BaseArFragment.OnTapArPlaneListener {
             Node().apply {
                 setParent(anchorNode)
                 renderable = it
+            }
+            it.view.setOnClickListener {
+                Toast.makeText(this, "Clicked!", Toast.LENGTH_LONG).show()
             }
         }
 
