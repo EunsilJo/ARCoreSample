@@ -33,7 +33,9 @@
             android:configChanges="orientation|screenSize"
             android:exported="true"
             android:screenOrientation="locked"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".CreateRenderablesActivity" />
+        <activity android:name=".AndroidWidgetsActivity"></activity>
     </application>
 
 </manifest>

@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
                 startActivity(Intent(this@MainActivity, OverviewActivity::class.java))
             }
             ListItem.CREATE_RENDERABLES.ordinal -> {
-
+                startActivity(Intent(this@MainActivity, CreateRenderablesActivity::class.java))
             }
             ListItem.BUILD_THE_SCENE.ordinal -> {
 
