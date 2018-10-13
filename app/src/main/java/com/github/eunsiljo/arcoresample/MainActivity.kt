@@ -1,24 +1,88 @@
 package com.github.eunsiljo.arcoresample
 
-import android.net.Uri
+import android.app.ActivityManager
+import android.content.Context
+import android.content.Intent
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MotionEvent
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
-import com.google.ar.core.HitResult
-import com.google.ar.core.Plane
-import com.google.ar.sceneform.AnchorNode
-import com.google.ar.sceneform.Node
-import com.google.ar.sceneform.assets.RenderableSource
-import com.google.ar.sceneform.math.Vector3
-import com.google.ar.sceneform.rendering.*
-import com.google.ar.sceneform.ux.ArFragment
-import com.google.ar.sceneform.ux.BaseArFragment
-import com.google.ar.sceneform.ux.TransformableNode
-import java.util.concurrent.CompletableFuture
+import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), BaseArFragment.OnTapArPlaneListener {
+class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
+    companion object {
+        private const val MIN_BUILD_VERSION_CODE: Int = Build.VERSION_CODES.N
+        private const val MIN_OPENGL_VERSION: Double = 3.0
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        if (!checkIsSupportedDevice()) {
+            finish()
+        }
+
+        with(lv_main) {
+            adapter = ArrayAdapter<CharSequence>(
+                context,
+                android.R.layout.simple_list_item_1,
+                android.R.id.text1,
+                ListItem.values().map { it.title }
+            )
+            onItemClickListener = this@MainActivity
+        }
+    }
+
+    override fun onItemClick(adapterView: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        when (position) {
+            ListItem.OVERVIEW.ordinal -> {
+                startActivity(Intent(this@MainActivity, OverviewActivity::class.java))
+            }
+            ListItem.CREATE_RENDERABLES.ordinal -> {
+
+            }
+            ListItem.BUILD_THE_SCENE.ordinal -> {
+
+            }
+            ListItem.LETS_PLAY_YOGA.ordinal -> {
+
+            }
+        }
+    }
+
+    private fun checkIsSupportedDevice(): Boolean =
+        when (Build.VERSION.SDK_INT < MIN_BUILD_VERSION_CODE) {
+            true -> {
+                Toast.makeText(this, "Sceneform requires Android N or later", Toast.LENGTH_LONG).show()
+                false
+            }
+            false -> {
+                val openGlVersionString = (getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager)
+                    .deviceConfigurationInfo
+                    .glEsVersion
+                when (java.lang.Double.parseDouble(openGlVersionString) < MIN_OPENGL_VERSION) {
+                    true -> {
+                        Toast.makeText(this, "Sceneform requires OpenGL ES 3.0 or later", Toast.LENGTH_LONG).show()
+                        false
+                    }
+                    false -> true
+                }
+            }
+        }
+
+    enum class ListItem(val title: String) {
+        OVERVIEW("1. Overview"),
+        CREATE_RENDERABLES("2. Create Renderables"),
+        BUILD_THE_SCENE("3. Build the Scene"),
+        LETS_PLAY_YOGA("4. Let's play Yoga")
+    }
+
+    /*
     companion object {
         private const val ANDY_ASSET = "andy.sfb"
         private const val DUCK_ASSET =
@@ -76,7 +140,7 @@ class MainActivity : AppCompatActivity(), BaseArFragment.OnTapArPlaneListener {
         if (!checkIsSupportedDevice()) {
             finish()
         }
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_ar)
 
         setAllRenderables()
         arFragment.setOnTapArPlaneListener(this)
@@ -226,4 +290,5 @@ class MainActivity : AppCompatActivity(), BaseArFragment.OnTapArPlaneListener {
                 )
             }
         }
+        */
 }
