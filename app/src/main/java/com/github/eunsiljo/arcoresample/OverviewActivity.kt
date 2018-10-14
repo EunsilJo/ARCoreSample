@@ -12,7 +12,6 @@ import com.google.ar.sceneform.Node
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.ux.ArFragment
 import com.google.ar.sceneform.ux.BaseArFragment
-import java.util.concurrent.CompletableFuture
 
 class OverviewActivity : AppCompatActivity(), BaseArFragment.OnTapArPlaneListener {
 
@@ -23,36 +22,35 @@ class OverviewActivity : AppCompatActivity(), BaseArFragment.OnTapArPlaneListene
     private val arFragment: ArFragment by lazy {
         supportFragmentManager.findFragmentById(R.id.fragment_ar) as ArFragment
     }
-    private val andyState: CompletableFuture<ModelRenderable> by lazy {
-        ModelRenderable.builder().setSource(this, Uri.parse(ANDY_ASSET)).build()
-    }
 
     private var modelRenderable: ModelRenderable? = null
-
-    private val modelNode
-        get() = Node().apply { modelRenderable?.let { renderable = it } }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ar)
 
-        makeModelRenderable(andyState)
-        arFragment.setOnTapArPlaneListener(this@OverviewActivity)
-    }
-
-    private fun makeModelRenderable(modelState: CompletableFuture<ModelRenderable>) {
-        modelState
+        ModelRenderable.builder()
+            .setSource(this, Uri.parse(ANDY_ASSET))
+            .build()
             .thenAccept { renderable -> modelRenderable = renderable }
             .exceptionally {
                 Toast.makeText(this, "Unable to load model renderable", Toast.LENGTH_LONG).show()
                 null
             }
+
+        arFragment.setOnTapArPlaneListener(this@OverviewActivity)
     }
 
     override fun onTapPlane(hitResult: HitResult, plane: Plane, motionEvent: MotionEvent) {
-        AnchorNode(hitResult.createAnchor()).apply {
+        val anchorNode = AnchorNode(hitResult.createAnchor()).apply {
             setParent(arFragment.arSceneView.scene)
-            addChild(modelNode)
+        }
+
+        modelRenderable?.let {
+            Node().apply {
+                setParent(anchorNode)
+                renderable = it
+            }
         }
     }
 }

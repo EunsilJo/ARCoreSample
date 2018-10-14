@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import com.github.eunsiljo.arcoresample.renderables.AndroidWidgetsActivity
 import kotlinx.android.synthetic.main.activity_create_renderables.*
 
 class CreateRenderablesActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
@@ -13,6 +14,11 @@ class CreateRenderablesActivity : AppCompatActivity(), AdapterView.OnItemClickLi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_renderables)
+
+        supportActionBar?.run {
+            setTitle(R.string.create_renderables_title)
+            setDisplayHomeAsUpEnabled(true)
+        }
 
         with(lv_create_renderables) {
             adapter = ArrayAdapter<CharSequence>(

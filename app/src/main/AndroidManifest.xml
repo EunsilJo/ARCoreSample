@@ -35,7 +35,17 @@
             android:screenOrientation="locked"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".CreateRenderablesActivity" />
-        <activity android:name=".AndroidWidgetsActivity"></activity>
+        <activity
+            android:name=".renderables.AndroidWidgetsActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="locked"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".renderables.ThreeDAssetsActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="locked"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
     </application>
 
 </manifest>

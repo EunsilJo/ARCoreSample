@@ -42,8 +42,12 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
-
-sceneform.asset('samples/models/andy/andy.obj',
+sceneform.asset('sampledata/models/andy/andy.obj',
         'default',
-        'samples/models/andy/andy.sfa',
+        'sampledata/models/andy/andy.sfa',
         'src/main/assets/andy')
+
+sceneform.asset('sampledata/models/heart/heart.obj',
+        'default',
+        'sampledata/models/heart/heart.sfa',
+        'src/main/assets/heart')
