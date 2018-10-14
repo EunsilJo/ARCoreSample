@@ -3,7 +3,6 @@ package com.github.eunsiljo.arcoresample.renderables
 import android.net.Uri
 import android.os.Bundle
 import android.view.MotionEvent
-import android.widget.Toast
 import com.github.eunsiljo.arcoresample.ARActivity
 import com.google.ar.core.HitResult
 import com.google.ar.core.Plane
@@ -63,14 +62,15 @@ class ThreeDAssetsActivity : ARActivity() {
             Node().apply {
                 setParent(anchorNode)
                 renderable = it
-                localPosition = Vector3(0.2f, 0f, -0.2f)
+                localPosition = Vector3(0.2f, 0f, 0f)
+                localScale = Vector3(0.2f, 0.2f, 0.2f)
             }
         }
         duckRenderable?.let {
             Node().apply {
                 setParent(anchorNode)
                 renderable = it
-                localPosition = Vector3(-0.5f, 0.1f, 0f)
+                localPosition = Vector3(-0.2f, 0f, 0f)
             }
         }
     }

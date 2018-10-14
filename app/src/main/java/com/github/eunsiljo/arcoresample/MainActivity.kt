@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
                 startActivity(Intent(this@MainActivity, BuildTheSceneActivity::class.java))
             }
             ListItem.LETS_PLAY_YOGA.ordinal -> {
-
+                startActivity(Intent(this@MainActivity, LetsPlayYogaActivity::class.java))
             }
         }
     }

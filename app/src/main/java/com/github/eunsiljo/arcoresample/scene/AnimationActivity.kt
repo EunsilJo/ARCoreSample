@@ -1,24 +1,13 @@
 package com.github.eunsiljo.arcoresample.scene
 
-import android.animation.ObjectAnimator
-import android.animation.TimeInterpolator
-import android.animation.ValueAnimator
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
-import android.view.animation.LinearInterpolator
-import android.widget.TextView
 import com.github.eunsiljo.arcoresample.ARActivity
 import com.github.eunsiljo.arcoresample.node.RotatingNode
 import com.google.ar.core.HitResult
 import com.google.ar.core.Plane
 import com.google.ar.sceneform.AnchorNode
-import com.google.ar.sceneform.FrameTime
-import com.google.ar.sceneform.Node
-import com.google.ar.sceneform.math.Quaternion
-import com.google.ar.sceneform.math.QuaternionEvaluator
-import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.ModelRenderable
 
 class AnimationActivity : ARActivity() {

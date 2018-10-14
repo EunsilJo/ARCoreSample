@@ -3,7 +3,6 @@ package com.github.eunsiljo.arcoresample.renderables
 import com.google.ar.sceneform.rendering.Color
 import android.os.Bundle
 import android.view.MotionEvent
-import android.widget.Toast
 import com.github.eunsiljo.arcoresample.ARActivity
 import com.google.ar.core.HitResult
 import com.google.ar.core.Plane
