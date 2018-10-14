@@ -3,6 +3,7 @@ package com.github.eunsiljo.arcoresample
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -33,6 +34,15 @@ class CreateRenderablesActivity : AppCompatActivity(), AdapterView.OnItemClickLi
             onItemClickListener = this@CreateRenderablesActivity
         }
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
 
     override fun onItemClick(adapterView: AdapterView<*>?, view: View?, position: Int, id: Long) {
         when (position) {

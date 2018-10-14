@@ -54,7 +54,20 @@
             android:exported="true"
             android:screenOrientation="locked"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".renderables.SimpleShapeMaterialActivity"
+        <activity
+            android:name=".renderables.SimpleShapeMaterialActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="locked"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".BuildTheSceneActivity" />
+        <activity
+            android:name=".scene.LocationActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="locked"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".scene.ScaleActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true"
             android:screenOrientation="locked"
