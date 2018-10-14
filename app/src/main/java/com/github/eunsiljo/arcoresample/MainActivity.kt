@@ -10,7 +10,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_list.*
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
@@ -21,13 +21,13 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_list)
 
         if (!checkIsSupportedDevice()) {
             finish()
         }
 
-        with(lv_main) {
+        with(list) {
             adapter = ArrayAdapter<CharSequence>(
                 context,
                 android.R.layout.simple_list_item_1,

@@ -51,3 +51,8 @@ sceneform.asset('sampledata/models/heart/heart.obj',
         'default',
         'sampledata/models/heart/heart.sfa',
         'src/main/assets/heart')
+
+sceneform.asset('sampledata/models/dhalsim/dhalsim.obj',
+        'default',
+        'sampledata/models/dhalsim/dhalsim.sfa',
+        'src/main/assets/dhalsim')

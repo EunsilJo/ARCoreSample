@@ -13,32 +13,25 @@ import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.ux.ArFragment
 import com.google.ar.sceneform.ux.BaseArFragment
 
-class OverviewActivity : AppCompatActivity(), BaseArFragment.OnTapArPlaneListener {
+class OverviewActivity : ARActivity() {
 
     companion object {
         private const val ANDY_ASSET = "andy.sfb"
-    }
-
-    private val arFragment: ArFragment by lazy {
-        supportFragmentManager.findFragmentById(R.id.fragment_ar) as ArFragment
     }
 
     private var modelRenderable: ModelRenderable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_ar)
 
         ModelRenderable.builder()
             .setSource(this, Uri.parse(ANDY_ASSET))
             .build()
             .thenAccept { renderable -> modelRenderable = renderable }
             .exceptionally {
-                Toast.makeText(this, "Unable to load model renderable", Toast.LENGTH_LONG).show()
+                showToast("Unable to load model renderable")
                 null
             }
-
-        arFragment.setOnTapArPlaneListener(this@OverviewActivity)
     }
 
     override fun onTapPlane(hitResult: HitResult, plane: Plane, motionEvent: MotionEvent) {

@@ -7,20 +7,23 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.github.eunsiljo.arcoresample.renderables.AndroidWidgetsActivity
-import kotlinx.android.synthetic.main.activity_create_renderables.*
+import com.github.eunsiljo.arcoresample.renderables.SimpleShapeActivity
+import com.github.eunsiljo.arcoresample.renderables.SimpleShapeMaterialActivity
+import com.github.eunsiljo.arcoresample.renderables.ThreeDAssetsActivity
+import kotlinx.android.synthetic.main.activity_list.*
 
 class CreateRenderablesActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_create_renderables)
+        setContentView(R.layout.activity_list)
 
         supportActionBar?.run {
             setTitle(R.string.create_renderables_title)
             setDisplayHomeAsUpEnabled(true)
         }
 
-        with(lv_create_renderables) {
+        with(list) {
             adapter = ArrayAdapter<CharSequence>(
                 context,
                 android.R.layout.simple_list_item_1,
@@ -37,13 +40,13 @@ class CreateRenderablesActivity : AppCompatActivity(), AdapterView.OnItemClickLi
                 startActivity(Intent(this@CreateRenderablesActivity, AndroidWidgetsActivity::class.java))
             }
             ListItem.THREE_D_ASSETS.ordinal -> {
-
+                startActivity(Intent(this@CreateRenderablesActivity, ThreeDAssetsActivity::class.java))
             }
             ListItem.SIMPLE_SHAPES.ordinal -> {
-
+                startActivity(Intent(this@CreateRenderablesActivity, SimpleShapeActivity::class.java))
             }
             ListItem.SIMPLE_SHAPES_MATERIAL.ordinal -> {
-
+                startActivity(Intent(this@CreateRenderablesActivity, SimpleShapeMaterialActivity::class.java))
             }
         }
     }

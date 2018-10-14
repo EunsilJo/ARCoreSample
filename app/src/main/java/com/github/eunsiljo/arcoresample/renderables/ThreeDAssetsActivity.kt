@@ -1,11 +1,10 @@
 package com.github.eunsiljo.arcoresample.renderables
 
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
 import android.widget.Toast
-import com.github.eunsiljo.arcoresample.R
+import com.github.eunsiljo.arcoresample.ARActivity
 import com.google.ar.core.HitResult
 import com.google.ar.core.Plane
 import com.google.ar.sceneform.AnchorNode
@@ -13,10 +12,8 @@ import com.google.ar.sceneform.Node
 import com.google.ar.sceneform.assets.RenderableSource
 import com.google.ar.sceneform.math.Vector3
 import com.google.ar.sceneform.rendering.ModelRenderable
-import com.google.ar.sceneform.ux.ArFragment
-import com.google.ar.sceneform.ux.BaseArFragment
 
-class ThreeDAssetsActivity : AppCompatActivity(), BaseArFragment.OnTapArPlaneListener {
+class ThreeDAssetsActivity : ARActivity() {
 
     companion object {
         private const val HEART_ASSET = "heart.sfb"
@@ -24,23 +21,18 @@ class ThreeDAssetsActivity : AppCompatActivity(), BaseArFragment.OnTapArPlaneLis
             "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/Duck/glTF/Duck.gltf"
     }
 
-    private val arFragment: ArFragment by lazy {
-        supportFragmentManager.findFragmentById(R.id.fragment_ar) as ArFragment
-    }
-
     private var heartRenderable: ModelRenderable? = null
     private var duckRenderable: ModelRenderable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_ar)
 
         ModelRenderable.builder()
             .setSource(this, Uri.parse(HEART_ASSET))
             .build()
             .thenAccept { renderable -> heartRenderable = renderable }
             .exceptionally {
-                Toast.makeText(this, "Unable to load model renderable", Toast.LENGTH_LONG).show()
+                showToast("Unable to load model renderable")
                 null
             }
 
@@ -57,11 +49,9 @@ class ThreeDAssetsActivity : AppCompatActivity(), BaseArFragment.OnTapArPlaneLis
             .build()
             .thenAccept { renderable -> duckRenderable = renderable }
             .exceptionally {
-                Toast.makeText(this, "Unable to load model renderable", Toast.LENGTH_LONG).show()
+                showToast("Unable to load model renderable")
                 null
             }
-
-        arFragment.setOnTapArPlaneListener(this@ThreeDAssetsActivity)
     }
 
     override fun onTapPlane(hitResult: HitResult, plane: Plane, motionEvent: MotionEvent) {
@@ -73,14 +63,14 @@ class ThreeDAssetsActivity : AppCompatActivity(), BaseArFragment.OnTapArPlaneLis
             Node().apply {
                 setParent(anchorNode)
                 renderable = it
-                localPosition = Vector3(0.2f, 0f, 0f)
+                localPosition = Vector3(0.2f, 0f, -0.2f)
             }
         }
         duckRenderable?.let {
             Node().apply {
                 setParent(anchorNode)
                 renderable = it
-                localPosition = Vector3(-0.2f, 0.1f, 0f)
+                localPosition = Vector3(-0.5f, 0.1f, 0f)
             }
         }
     }

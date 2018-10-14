@@ -34,13 +34,13 @@
       'Orientation',
     ],
     collision: {},
-    file: 'samples/models/andy/andy.obj',
+    file: 'sampledata/models/andy/andy.obj',
     name: 'andy',
     recenter: 'root',
   },
   samplers: [
     {
-      file: 'samples/models/andy/andy.png',
+      file: 'sampledata/models/andy/andy.png',
       name: 'andy',
       pipeline_name: 'andy.png',
     },
