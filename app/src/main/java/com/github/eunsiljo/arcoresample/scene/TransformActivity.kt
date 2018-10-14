@@ -1,15 +1,17 @@
-package com.github.eunsiljo.arcoresample
+package com.github.eunsiljo.arcoresample.scene
 
 import android.net.Uri
+import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
+import com.github.eunsiljo.arcoresample.ARActivity
 import com.google.ar.core.HitResult
 import com.google.ar.core.Plane
 import com.google.ar.sceneform.AnchorNode
-import com.google.ar.sceneform.Node
 import com.google.ar.sceneform.rendering.ModelRenderable
+import com.google.ar.sceneform.ux.TransformableNode
 
-class OverviewActivity : ARActivity() {
+class TransformActivity : ARActivity() {
 
     companion object {
         private const val ANDY_ASSET = "andy.sfb"
@@ -36,9 +38,10 @@ class OverviewActivity : ARActivity() {
         }
 
         andyRenderable?.let {
-            Node().apply {
+            TransformableNode(arFragment.transformationSystem).apply {
                 setParent(anchorNode)
                 renderable = it
+                select()
             }
         }
     }

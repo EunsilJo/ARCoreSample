@@ -7,8 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import com.github.eunsiljo.arcoresample.scene.LocationActivity
-import com.github.eunsiljo.arcoresample.scene.ScaleActivity
+import com.github.eunsiljo.arcoresample.scene.*
 import kotlinx.android.synthetic.main.activity_list.*
 
 class BuildTheSceneActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
@@ -51,19 +50,16 @@ class BuildTheSceneActivity : AppCompatActivity(), AdapterView.OnItemClickListen
                 startActivity(Intent(this@BuildTheSceneActivity, ScaleActivity::class.java))
             }
             ListItem.ROTATION.ordinal -> {
-                //startActivity(Intent(this@BuildTheSceneActivity, AndroidWidgetsActivity::class.java))
+                startActivity(Intent(this@BuildTheSceneActivity, RotationActivity::class.java))
             }
             ListItem.TRANSFORM.ordinal -> {
-                //startActivity(Intent(this@BuildTheSceneActivity, AndroidWidgetsActivity::class.java))
+                startActivity(Intent(this@BuildTheSceneActivity, TransformActivity::class.java))
             }
             ListItem.ANIMATION.ordinal -> {
-                //startActivity(Intent(this@BuildTheSceneActivity, AndroidWidgetsActivity::class.java))
+                startActivity(Intent(this@BuildTheSceneActivity, AnimationActivity::class.java))
             }
-            ListItem.LIGHT.ordinal -> {
-                //startActivity(Intent(this@BuildTheSceneActivity, AndroidWidgetsActivity::class.java))
-            }
-            ListItem.SHADOW.ordinal -> {
-                //startActivity(Intent(this@BuildTheSceneActivity, AndroidWidgetsActivity::class.java))
+            ListItem.LIGHT_AND_SHADOW.ordinal -> {
+                startActivity(Intent(this@BuildTheSceneActivity, LightAndShadowActivity::class.java))
             }
         }
     }
@@ -74,7 +70,6 @@ class BuildTheSceneActivity : AppCompatActivity(), AdapterView.OnItemClickListen
         ROTATION("Rotation"),
         TRANSFORM("Transform"),
         ANIMATION("Animation"),
-        LIGHT("Light"),
-        SHADOW("Shadow")
+        LIGHT_AND_SHADOW("Light & Shadow")
     }
 }

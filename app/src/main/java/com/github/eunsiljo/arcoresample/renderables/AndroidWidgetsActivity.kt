@@ -2,7 +2,6 @@ package com.github.eunsiljo.arcoresample.renderables
 
 import android.os.Bundle
 import android.view.MotionEvent
-import android.widget.Toast
 import com.github.eunsiljo.arcoresample.ARActivity
 import com.github.eunsiljo.arcoresample.R
 import com.google.ar.core.HitResult
