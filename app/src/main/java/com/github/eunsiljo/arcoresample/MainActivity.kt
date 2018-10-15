@@ -47,8 +47,8 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
         when (item.itemId) {
-            R.id.menu_license -> {
-                startActivity(Intent(this@MainActivity, LicenseActivity::class.java))
+            R.id.menu_privacy_and_license -> {
+                startActivity(Intent(this@MainActivity, PrivacyAndLicenseActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)

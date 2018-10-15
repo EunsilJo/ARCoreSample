@@ -3,20 +3,24 @@ package com.github.eunsiljo.arcoresample
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_license.*
+import kotlinx.android.synthetic.main.activity_privacy_and_license.*
 
-class LicenseActivity : AppCompatActivity() {
+class PrivacyAndLicenseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_license)
+        setContentView(R.layout.activity_privacy_and_license)
 
         supportActionBar?.run {
-            setTitle(R.string.license_title)
+            setTitle(R.string.privacy_and_license_title)
             setDisplayHomeAsUpEnabled(true)
         }
 
-        tv_license.text =
+        tv_privacy_and_license.text =
+            "This application runs on ARCore, " +
+            "which is provided by Google LLC and governed by the Google Privacy Policy.\n" +
+            "https://play.google.com/store/apps/details?id=com.google.ar.core\n" +
+            "https://policies.google.com/privacy\n\n" +
             "•   ARCoreSample\n" +
             "https://github.com/EunsilJo/ARCoreSample\n\n" +
             "•   ARCore\n" +

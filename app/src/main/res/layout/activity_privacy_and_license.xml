@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    tools:context=".LicenseActivity">
+    tools:context=".PrivacyAndLicenseActivity">
 
     <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/tv_license"
+        android:id="@+id/tv_privacy_and_license"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
