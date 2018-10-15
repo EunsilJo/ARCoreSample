@@ -97,11 +97,13 @@
             android:exported="true"
             android:screenOrientation="locked"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".LetsPlayYogaActivity"
+        <activity
+            android:name=".LetsPlayYogaActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true"
             android:screenOrientation="locked"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".LicenseActivity"></activity>
     </application>
 
 </manifest>

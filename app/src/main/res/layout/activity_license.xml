@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".LicenseActivity">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_license"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:lineSpacingExtra="5dp"
+        android:linksClickable="true"
+        android:autoLink="web"
+        android:scrollbars="vertical"
+        tools:text="https://github.com/Eunsiljo"/>
+</android.support.constraint.ConstraintLayout>
