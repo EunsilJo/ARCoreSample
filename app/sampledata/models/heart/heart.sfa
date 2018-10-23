@@ -1,0 +1,43 @@
+{
+  materials: [
+    {
+      name: 'Heart Red',
+      parameters: [
+        {
+          baseColor: null,
+        },
+        {
+          baseColorTint: [
+            0.764706,
+            0.082352999999999996,
+            0.196078,
+            1,
+          ],
+        },
+        {
+          metallic: 0,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/obj_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+    ],
+    collision: {},
+    file: 'sampledata/models/heart/heart.obj',
+    name: 'heart',
+    recenter: 'root',
+    scale: 0.011206000000000001,
+  },
+  version: '0.52:1',
+}
