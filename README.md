@@ -1,7 +1,7 @@
 # ARCoreSample
 [![API](https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=24)
 
-The sample app that helps you to experience the ARCore. Android API 24+ required.
+A sample project that helps you to experience the ARCore. Android API 24+ required.
 
 ## Getting started
 
@@ -10,17 +10,31 @@ For help getting started with ARCore, view our online
 
 ## How to
 
-First, find planes.
-Second, touch anchors.
-Third, see 3D models.
+First, find planes.</br>
+Second, touch anchors.</br>
+Third, see 3D models.</br>
 
 ### Overview
+<img src="https://github.com/EunsilJo/ARCoreSample/blob/master/screenshots/1.jpg?raw=true" height="400"/>
+
+* Scene, Plane, Anchor, Node, Renderable
 
 ### Create Renderables
+<img src="https://github.com/EunsilJo/ARCoreSample/blob/master/screenshots/2-1.jpg?raw=true" height="400"/> <img src="https://github.com/EunsilJo/ARCoreSample/blob/master/screenshots/2-2.jpg?raw=true" height="400"/> <img src="https://github.com/EunsilJo/ARCoreSample/blob/master/screenshots/2-3.jpg?raw=true" height="400"/> <img src="https://github.com/EunsilJo/ARCoreSample/blob/master/screenshots/2-4.jpg?raw=true" height="400"/>
+
+* Android Widgets, 3D Assets, Simple Shapes, Material
 
 ### Build the Scene
+<img src="https://github.com/EunsilJo/ARCoreSample/blob/master/screenshots/3-1.jpg?raw=true" height="400"/> <img src="https://github.com/EunsilJo/ARCoreSample/blob/master/screenshots/3-2.jpg?raw=true" height="400"/> <img src="https://github.com/EunsilJo/ARCoreSample/blob/master/screenshots/3-6.jpg?raw=true" height="400"/>
+
+* Location, Scale, Rotation, Light & Shadow
+
+* Transform - [Let's transform the Andy.](https://youtu.be/S37LH6GowC4)
+* Animation - [Let's animate the Andy.](https://youtu.be/FbGgb7bOU2c)
 
 ### Let's play Yoga
+
+* [Let's play yoga with Dhalsim.](https://youtu.be/ohm6R2Dyoj0)
 
 ## License
 This application runs on [ARCore](https://play.google.com/store/apps/details?id=com.google.ar.core), which is provided by Google LLC and governed by the [Google Privacy Policy](https://policies.google.com/privacy).
