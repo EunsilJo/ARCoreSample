@@ -1,5 +1,5 @@
 # ARCoreSample
-[![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=24)
+[![API](https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=24)
 
 The sample app that helps you to experience the ARCore. Android API 24+ required.
 
