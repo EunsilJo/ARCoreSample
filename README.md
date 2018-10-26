@@ -1,18 +1,16 @@
 # ARCoreSample
 [![API](https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=24)
 
-A sample project that helps you to experience the ARCore. Android API 24+ required.
+A sample project that helps you to experience ARCore. Android API 24+ required.
 
 ## Getting started
 
-For help getting started with ARCore, view our online
+For help getting started with ARCore, view this online
 [documentation](https://developers.google.com/ar/).
 
 ## How to
 
-First, find planes.</br>
-Second, touch anchors.</br>
-Third, see 3D models.</br>
+First, find planes. Second, touch anchors. Third, see 3D models.
 
 ### Overview
 <img src="https://github.com/EunsilJo/ARCoreSample/blob/master/screenshots/1.jpg?raw=true" height="400"/>
@@ -29,8 +27,8 @@ Third, see 3D models.</br>
 
 * Location, Scale, Rotation, Light & Shadow
 
-* Transform - [Let's transform the Andy.](https://youtu.be/S37LH6GowC4)
-* Animation - [Let's animate the Andy.](https://youtu.be/FbGgb7bOU2c)
+* Transform - [Let's transform Andy.](https://youtu.be/S37LH6GowC4)
+* Animation - [Let's animate Andy.](https://youtu.be/FbGgb7bOU2c)
 
 ### Let's play Yoga
 
